@@ -27,6 +27,9 @@
       font-style: normal;
       font-weight: 600;
       line-height: normal;
+      span {
+        filter: blur(4px);
+      }
     }
     p {
       color: #2c3837;
@@ -35,10 +38,6 @@
       font-style: normal;
       font-weight: 400;
       line-height: normal;
-
-      span {
-        filter: blur(4px);
-      }
     }
   }
 

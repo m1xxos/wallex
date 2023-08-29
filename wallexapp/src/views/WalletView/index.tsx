@@ -16,11 +16,6 @@ function WalletView({}: Props) {
         </div>
         <BankAccountCardsContainer />
       </div>
-      <div className={styles.group}>
-        <div className={styles.heading}>
-          <SmallHeading>последние действия</SmallHeading>
-        </div>
-      </div>
     </div>
   );
 }

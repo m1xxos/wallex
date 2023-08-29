@@ -1,0 +1,42 @@
+version: '3'
+services:
+  # Сервис базы данных
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: mydb
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+    restart: unless-stopped
+
+  # Сервис API
+  api:
+    image: m1xxos/wallexapi
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgres://myuser:mypassword@db/mydb
+    restart: unless-stopped
+
+  # Сервис веб-приложения
+  web:
+    image: m1xxos/wallex
+    ports:
+      - "80:3000"
+    depends_on:
+      - api
+    environment:
+      REACT_APP_BACK_DOMAIN: http://localhost:8000
+    restart: unless-stopped
+
+  web_bamk:
+    image: m1xxos/bankfront
+    ports:
+      - "8080:8080"
+    depends_on:
+      - api
+    environment:
+      BACK_DOMAIN: http://localhost:8000
+    restart: unless-stopped

@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import styles from './mainContainer.module.scss';
 import { ReactComponent as IconSVG } from '../../assets/icon.svg';
 import { ReactComponent as WalletSVG } from '../../assets/wallet.svg';
@@ -8,13 +8,15 @@ import { ReactComponent as OffersSVG } from '../../assets/offers.svg';
 import ImageButton from '../../ui/ImageButton';
 import ProfileImage from '../../assets/profileimage.png';
 import FooterButton from '../../ui/FooterButton';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+
 type Props = {
   footer?: boolean;
 };
 
 function MainContainer({ footer = false }: Props) {
   const [pathState, setPath] = useState(window.location.pathname);
+
   const paths = [
     {
       path: '/',
@@ -40,7 +42,10 @@ function MainContainer({ footer = false }: Props) {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <IconSVG />
+        <Link to="/">
+          <IconSVG />
+        </Link>
+
         <h1>wallex</h1>
         <ImageButton>
           <img src={ProfileImage} />

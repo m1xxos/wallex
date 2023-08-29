@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+  padding: 5px;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  flex: 1 0 0;
+  border-radius: 10px;
+  background: #e4dedf;
+
+  > p {
+    color: #798486;
+    text-align: center;
+    font-family: Nunito;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+}

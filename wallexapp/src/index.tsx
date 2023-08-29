@@ -2,19 +2,31 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './styles/app.scss';
 import reportWebVitals from './reportWebVitals';
-import { createBrowserRouter, RouterProvider, Navigate, Outlet } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, redirect } from 'react-router-dom';
 import './styles/fontFaces.css';
 import MainContainer from './views/MainContainer';
 import WalletView from './views/WalletView';
 import CurrencyView from './views/CurrencyView';
 import OffersView from './views/OffersView';
 import HelpView from './views/HelpView';
+import AddAccountView from './views/AddAccountView';
+import SignInView from './views/SignInView';
+import { useAuthStore } from './stores/authStore';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
 const router = createBrowserRouter([
   {
+    path: '/auth/signin',
+    element: <SignInView />,
+  },
+  {
     path: '/',
+    loader: async () => {
+      let res = await useAuthStore.getState().verify();
+      if (!res) return redirect('/auth/signin');
+      else return null;
+    },
     element: <MainContainer footer />,
     children: [
       {
@@ -36,12 +48,19 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: '/profile',
-    element: (
-      <div>
-        <p>kekekeke</p>
-      </div>
-    ),
+    path: '/add',
+    loader: async () => {
+      let res = await useAuthStore.getState().verify();
+      if (!res) return redirect('/auth/signin');
+      else return null;
+    },
+    element: <MainContainer />,
+    children: [
+      {
+        path: '/add/account',
+        element: <AddAccountView />,
+      },
+    ],
   },
 ]);
 

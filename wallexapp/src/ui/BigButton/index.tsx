@@ -1,11 +1,16 @@
 import styles from './bigButton.module.scss';
-type Props = {
+import React from 'react';
+interface Props
+  extends React.DetailedHTMLProps<
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
+    HTMLButtonElement
+  > {
   title: string;
-};
+}
 
-function BigButton({ title }: Props) {
+function BigButton({ title, ...attrs }: Props) {
   return (
-    <button className={styles.container}>
+    <button className={styles.container} {...attrs}>
       <p>{title}</p>
     </button>
   );

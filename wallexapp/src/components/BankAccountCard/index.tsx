@@ -1,14 +1,12 @@
-import { Banks, Wallets } from '../../tools';
+import { BankType, Banks, WalletType, Wallets } from '../../tools';
 import SmallBankCard from '../SmallBankCard';
 import styles from './bankAccountCard.module.scss';
 type Props = {
-  walletId: number;
+  wallet: WalletType;
 };
 
-function BankAccountCard({ walletId }: Props) {
-  let wallet = Wallets[walletId];
-  let bank = Banks[wallet.bankId];
-  console.log(bank);
+function BankAccountCard({ wallet }: Props) {
+  let bank = Banks.find((bank) => bank.id === wallet.bankId) as BankType;
   return (
     <div className={styles.container} style={{ background: bank.color }}>
       <div className={styles.bankLogo}>{bank.logo}</div>

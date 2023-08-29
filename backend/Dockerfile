@@ -14,4 +14,7 @@ ADD . /web_django/
 
 COPY entrypoint.sh /home/docker/entrypoint.sh
 
+RUN apt-get update
+RUN apt-get install sqlite3
+
 CMD ["/home/docker/entrypoint.sh"]

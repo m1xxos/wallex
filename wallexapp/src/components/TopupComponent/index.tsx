@@ -1,18 +1,16 @@
-import { useCurrencyStore } from '../../stores/currencyStore';
+import { useEffect, useState } from 'react';
 import BigButton from '../../ui/BigButton';
 import BankCardList from '../BankCardList';
-import styles from './exchangeComponent.module.scss';
-import { useEffect, useState } from 'react';
-import { WalletType } from '../../tools';
+import styles from './topupComponent.module.scss';
 import axios from 'axios';
 import { useAuthStore } from '../../stores/authStore';
+import { useNavigate } from 'react-router-dom';
+import { WalletType } from '../../tools';
 type Props = {};
 
-function ExhangeComponent({}: Props) {
+function TopupComponent({}: Props) {
   const token = useAuthStore((state) => state.token);
   const [wallets, setWallets] = useState<WalletType[]>();
-  const setExFrom = useCurrencyStore((state) => state.setExFrom);
-  const setExTo = useCurrencyStore((state) => state.setExTo);
   useEffect(() => {
     (async () => {
       let res = await axios.get(`${process.env.REACT_APP_BACK_DOMAIN}/api/bank/account/`, {
@@ -44,15 +42,43 @@ function ExhangeComponent({}: Props) {
       );
     })();
   }, []);
-
+  const [walletId, setWalletId] = useState<number | undefined>(
+    wallets ? (wallets[0] as WalletType).id : undefined,
+  );
+  const [value, setValue] = useState<string>();
+  const navigate = useNavigate();
+  async function Topup() {
+    await axios.post(
+      `${process.env.REACT_APP_BACK_DOMAIN}/api/bank/account/topup`,
+      {
+        amount: Number(value),
+        account: walletId,
+      },
+      {
+        headers: {
+          Authorization: 'Bearer ' + token,
+        },
+      },
+    );
+    return navigate('/');
+  }
   return (
     <div className={styles.container}>
-      <BankCardList from wallets={wallets as WalletType[]} onSet={setExFrom} />
-      <BankCardList wallets={wallets as WalletType[]} onSet={setExTo} />
-      <p>ЦБ РФ · 31.08.2023 · 1 ₽ = 0,870565 ₹ · 1 ₽ = 0,04 ₪</p>
-      <BigButton title="выполнить обмен" />
+      <input
+        type="text"
+        style={{ height: '40px', fontSize: '20px', width: '100%' }}
+        value={value}
+        onChange={(e) => setValue(e.currentTarget.value)}
+      />
+      <BankCardList
+        from
+        wallets={wallets as WalletType[]}
+        onSet={setWalletId}
+        walletId={wallets && (wallets[0] as WalletType).id}
+      />
+      {walletId !== undefined && <BigButton title="пополнить счёт" onClick={Topup} />}
     </div>
   );
 }
 
-export default ExhangeComponent;
+export default TopupComponent;
