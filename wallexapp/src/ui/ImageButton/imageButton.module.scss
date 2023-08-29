@@ -1,0 +1,32 @@
+.container {
+  border: none;
+  background: transparent;
+  position: relative;
+  display: flex;
+  border-radius: 5px;
+  overflow: hidden;
+
+  &::after {
+    content: ' ';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: #000000;
+    opacity: 0;
+    transition: opacity 0.1s ease-in-out;
+  }
+
+  &:hover {
+    &::after {
+      opacity: 0.2;
+    }
+  }
+
+  &:focus {
+    &::after {
+      opacity: 0.4;
+    }
+  }
+}

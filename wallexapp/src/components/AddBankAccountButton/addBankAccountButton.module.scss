@@ -1,0 +1,29 @@
+.container {
+  overflow: hidden;
+  height: 104px;
+  width: 166px;
+  padding: 2px 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  border: none;
+  border-radius: 10px;
+  background: rgba(172, 173, 173, 0.8);
+  box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+  &:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.25);
+  }
+
+  p {
+    margin: 0 auto;
+    color: rgba(255, 255, 255, 0.5);
+    font-family: Nunito;
+    font-size: 140px;
+    font-style: normal;
+    font-weight: 100;
+    line-height: 83px;
+  }
+}

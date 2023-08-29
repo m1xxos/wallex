@@ -1,0 +1,50 @@
+.container {
+  position: relative;
+  overflow: hidden;
+  height: 104px;
+  width: 166px;
+  padding: 2px 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-radius: 10px;
+  box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+  .bankLogo {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  p {
+    z-index: 1;
+    font-family: Nunito;
+    color: #2c3837;
+    text-align: right;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+
+  .cards {
+    display: flex;
+    padding-left: 10px;
+    gap: 5px;
+  }
+
+  .currencySymbol {
+    font-family: Nunito;
+    position: absolute;
+    right: 0px;
+    bottom: -55px;
+    color: rgba(233, 233, 233, 0.3);
+    font-size: 140px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+}

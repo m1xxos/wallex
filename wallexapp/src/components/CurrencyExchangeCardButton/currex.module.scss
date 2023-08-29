@@ -1,0 +1,60 @@
+.container {
+  border: none;
+  display: flex;
+  height: 50px;
+  width: 100%;
+  padding: 2px 9px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1 0 0;
+  align-self: stretch;
+  gap: 10px;
+  border-radius: 5px;
+  &:focus {
+    outline: 1px solid rgba(75, 50, 40, 0.356);
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+  }
+
+  .text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    .input {
+      display: flex;
+      gap: 10px;
+      h1 {
+        color: #2c3837;
+        text-align: right;
+        font-family: Nunito;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+      }
+    }
+
+    p {
+      color: #2c3837;
+      font-family: Nunito;
+      font-size: 13px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+
+      span {
+        filter: blur(4px);
+      }
+    }
+  }
+
+  .bankLogo {
+    height: 30px;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

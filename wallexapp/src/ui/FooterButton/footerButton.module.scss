@@ -1,0 +1,39 @@
+.container {
+  opacity: 0.6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 5px 0 5px;
+  background: transparent;
+  width: 100%;
+  text-decoration: none;
+
+  p {
+    color: #2c3837;
+    text-align: center;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    white-space: nowrap;
+  }
+  .line {
+    height: 2px;
+    width: 100%;
+    background: none;
+  }
+}
+
+.active {
+  opacity: 1;
+
+  .line {
+    background: linear-gradient(
+      90deg,
+      rgba(240, 240, 240, 0) 0%,
+      #deafa7 16.15%,
+      #deafa7 82.29%,
+      rgba(240, 240, 240, 0) 100%
+    );
+  }
+}

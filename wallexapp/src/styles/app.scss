@@ -1,0 +1,50 @@
+@import './normalize';
+
+* {
+  font-family: 'Nunito Sans';
+
+  // современная спецификация для Firefox
+  scrollbar-width: 8px;
+  scrollbar-color: var(--scroll-color) transparent;
+}
+
+/* для Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: var(--scroll-color);
+  border-radius: 8px;
+  border: 1px solid var(--scroll-border-color);
+}
+
+*::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
+html {
+  height: 100%;
+  width: 100%;
+  body {
+    height: 100%;
+    width: 100%;
+    #root {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      padding: 10px;
+
+      background: linear-gradient(
+        180deg,
+        rgba(222, 175, 167, 0.4) 0%,
+        rgba(250, 250, 250, 0.1) 10%,
+        rgba(250, 250, 250, 0.1) 90%,
+        rgba(222, 175, 167, 0.4) 100%
+      );
+    }
+  }
+}

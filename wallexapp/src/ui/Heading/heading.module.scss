@@ -1,0 +1,26 @@
+.container {
+  height: 35px;
+  width: 100%;
+
+  h2 {
+    padding-left: 30px;
+    color: #2c3837;
+    text-align: left;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+
+  .line {
+    height: 2px;
+    width: 100%;
+    background: linear-gradient(
+      90deg,
+      rgba(240, 240, 240, 0) 0%,
+      #deafa7 7.29%,
+      #deafa7 40%,
+      rgba(240, 240, 240, 0) 100%
+    );
+  }
+}
