@@ -3,62 +3,22 @@ default:
   services:
     - docker:20.10.16-dind
 
-docker-build-wallex:
-  tags:
-    - docker
+docker-build:
   artifacts:
     name: "$CI_COMMIT_REF_NAME"
-    expire_in: 2h
     paths:
-      - node_modules
+      - artifacts/
   
   stage: build
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
 
   script:
-    - |
-      if [[ "$CI_COMMIT_BRANCH" == "$CI_DEFAULT_BRANCH" ]]; then
-        tag=""
-        echo "Running on default branch '$CI_DEFAULT_BRANCH': tag = 'latest'"
-      else
-        tag=":$CI_COMMIT_REF_SLUG"
-        echo "Running on branch '$CI_COMMIT_BRANCH': tag = $tag"
-      fi
-    - docker build --pull -t "$CI_REGISTRY_IMAGE${tag}" ./wallexapp/
-    - docker push "$CI_REGISTRY_IMAGE${tag}"
+
+    - docker build --pull -t "wallex-back${CI_COMMIT_SHORT_SHA}" ./backend
+    - docker push "wallex-back${CI_COMMIT_SHORT_SHA}"
 
   rules:
     - if: $CI_COMMIT_BRANCH
       exists:
-        - wallexapp/Dockerfile
-
-docker-build-bankfront:
-  tags:
-    - docker
-  artifacts:
-    name: "$CI_COMMIT_REF_NAME"
-    expire_in: 2h
-    paths:
-      - node_modules
-  
-  stage: build
-  before_script:
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
-
-  script:
-    - |
-      if [[ "$CI_COMMIT_BRANCH" == "$CI_DEFAULT_BRANCH" ]]; then
-        tag=""
-        echo "Running on default branch '$CI_DEFAULT_BRANCH': tag = 'latest'"
-      else
-        tag=":$CI_COMMIT_REF_SLUG"
-        echo "Running on branch '$CI_COMMIT_BRANCH': tag = $tag"
-      fi
-    - docker build --pull -t "$CI_REGISTRY_IMAGE${tag}" ./bankfront/
-    - docker push "$CI_REGISTRY_IMAGE${tag}"
-
-  rules:
-    - if: $CI_COMMIT_BRANCH
-      exists:
-        - bankfront/Dockerfile
+        - backend/Dockerfile
